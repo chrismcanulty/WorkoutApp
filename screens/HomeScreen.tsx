@@ -1,4 +1,5 @@
-import { View, Text, Button } from 'react-native';
+import React from 'react';
+import { View, Text, Button, Alert } from 'react-native';
 
 export default function HomeScreen() {
   return (
@@ -6,7 +7,7 @@ export default function HomeScreen() {
       <Text>I am home screen</Text>
       <Button
         title="Go to Planner"
-        onPress={() => alert("Go to planner")}
+        onPress={() => Alert.alert('Go to planner')}
       />
     </View>
   );
