@@ -38,15 +38,17 @@ function BottomTabNavigator() {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: () => <HomeIcon name="home" size={30} color="black" />,
+          tabBarIcon: ({ color, size }) => (
+            <HomeIcon name="home" size={size} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
         name="Planner"
         component={PlannerScreen}
         options={{
-          tabBarIcon: () => (
-            <PlannerIcon name="add-to-list" size={30} color="black" />
+          tabBarIcon: ({ color, size }) => (
+            <PlannerIcon name="add-to-list" size={size} color={color} />
           ),
         }}
       />
