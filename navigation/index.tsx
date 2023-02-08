@@ -2,7 +2,8 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-
+import HomeIcon from 'react-native-vector-icons/FontAwesome';
+import PlannerIcon from 'react-native-vector-icons/Entypo';
 import HomeScreen from '../screens/HomeScreen';
 import PlannerScreen from '../screens/PlannerScreen';
 
@@ -36,20 +37,18 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
-        options={
-          {
-            // tabBarIcon: () => (
-            //   <Icon name="ios-person" size={30} color="#4F8EF7" />
-            // ),
-          }
-        }
+        options={{
+          tabBarIcon: () => <HomeIcon name="home" size={30} color="black" />,
+        }}
       />
       <BottomTab.Screen
         name="Planner"
         component={PlannerScreen}
-        // options={{
-        //   tabBarIcon: ({ color, size }) => <FaHome size={size} color={color} />,
-        // }}
+        options={{
+          tabBarIcon: () => (
+            <PlannerIcon name="add-to-list" size={30} color="black" />
+          ),
+        }}
       />
     </BottomTab.Navigator>
   );
