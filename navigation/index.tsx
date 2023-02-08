@@ -33,8 +33,24 @@ const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator initialRouteName="Home">
-      <BottomTab.Screen name="Home" component={HomeScreen} />
-      <BottomTab.Screen name="Planner" component={PlannerScreen} />
+      <BottomTab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={
+          {
+            // tabBarIcon: () => (
+            //   <Icon name="ios-person" size={30} color="#4F8EF7" />
+            // ),
+          }
+        }
+      />
+      <BottomTab.Screen
+        name="Planner"
+        component={PlannerScreen}
+        // options={{
+        //   tabBarIcon: ({ color, size }) => <FaHome size={size} color={color} />,
+        // }}
+      />
     </BottomTab.Navigator>
   );
 }
