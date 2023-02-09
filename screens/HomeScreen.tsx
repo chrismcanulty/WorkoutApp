@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, Text } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import data from '../data.json';
 import { Workout } from '../types/data';
@@ -11,6 +11,7 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
   return (
     <View style={styles.container}>
       {/* data must be an array for FlatList */}
+      <Text style={styles.header}>My Workouts</Text>
       <FlatList
         data={data as Array<Workout>}
         // Array<Workout> can also be expressed as Workout[]
@@ -24,5 +25,11 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    flex: 1,
+  },
+  header: {
+    fontSize: 20,
+    marginBottom: 20,
+    fontWeight: 'bold',
   },
 });
