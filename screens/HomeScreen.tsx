@@ -2,10 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import data from '../data.json';
+import { Workout } from '../types/data';
 
 export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
   // { item }: any -> all props specified as type 'any'; notation below: only {item} has type 'any'
-  const renderItem = ({ item }: { item: any }) => (
+  const renderItem = ({ item }: { item: Workout }) => (
     <View>
       <Text>{item.name}</Text>
       <Text>{item.difficulty}</Text>
@@ -16,7 +17,8 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
     <View style={styles.container}>
       {/* data must be an array for FlatList */}
       <FlatList
-        data={data}
+        data={data as Array<Workout>}
+        // Array<Workout> can also be expressed as Workout[]
         renderItem={renderItem}
         keyExtractor={item => item.slug}
       />
