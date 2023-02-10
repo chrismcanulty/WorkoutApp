@@ -26,11 +26,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 5,
+    fontFamily: 'Montserrat-Regular',
   },
   duration: {
     fontSize: 15,
+    fontFamily: 'Montserrat-Regular',
   },
   difficulty: {
     fontSize: 15,
+    fontFamily: 'Montserrat-Regular',
   },
 });
