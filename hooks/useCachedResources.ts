@@ -1,13 +1,18 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
-export default function useCachedResources() {
-  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+// export default function useCachedResources() {
+//   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
 
-  useEffect(() => {
-    function loadResourcesAndDataAsync() {}
+//   useEffect(() => {
+//     function loadResourcesAndDataAsync() {
+//       try {
+//       } catch (e) {
+//         console.warn(e);
+//       }
+//     }
 
-    loadResourcesAndDataAsync();
-  }, [isLoadingComplete]);
+//     loadResourcesAndDataAsync();
+//   }, [isLoadingComplete]);
 
-  return isLoadingComplete;
-}
+//   return isLoadingComplete;
+// }
