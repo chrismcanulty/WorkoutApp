@@ -13,7 +13,7 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
     <View style={styles.container}>
       {/* data must be an array for FlatList */}
       <Text style={styles.header}>My Workouts</Text>
-      <MontserratText>New Workouts</MontserratText>
+      {/* <MontserratText style={{ fontSize: 30 }}>New Workouts</MontserratText> */}
       <FlatList
         data={data as Array<Workout>}
         // Array<Workout> can also be expressed as Workout[]
