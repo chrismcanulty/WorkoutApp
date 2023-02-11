@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, Text } from 'react-native';
-import { MontserratText } from '../components/styled/MontserratText';
+import { View, StyleSheet, FlatList, Text, Pressable } from 'react-native';
+// import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import data from '../data.json';
 import { Workout } from '../types/data';
@@ -17,7 +17,13 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
       <FlatList
         data={data as Array<Workout>}
         // Array<Workout> can also be expressed as Workout[]
-        renderItem={WorkoutItem}
+        renderItem={({ item }) => {
+          return (
+            <Pressable onPress={() => alert(`I am pressed - ${item.name}`)}>
+              <WorkoutItem item={item} />
+            </Pressable>
+          );
+        }}
         keyExtractor={item => item.slug}
       />
     </View>

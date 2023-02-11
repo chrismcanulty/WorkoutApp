@@ -1,3 +1,4 @@
+// can deleted this component - based on expo simulator
 import React from 'react';
 import { Text } from 'react-native';
 
