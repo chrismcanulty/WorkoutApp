@@ -26,7 +26,11 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="WorkoutDetail" component={WorkoutDetailScreen} />
+      <Stack.Screen
+        name="WorkoutDetail"
+        component={WorkoutDetailScreen}
+        options={{ title: '' }}
+      />
     </Stack.Navigator>
   );
 }

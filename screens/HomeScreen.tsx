@@ -19,7 +19,10 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
         // Array<Workout> can also be expressed as Workout[]
         renderItem={({ item }) => {
           return (
-            <Pressable onPress={() => navigation.navigate('WorkoutDetail')}>
+            <Pressable
+              onPress={() =>
+                navigation.navigate('WorkoutDetail', { slug: item.slug })
+              }>
               <WorkoutItem item={item} />
             </Pressable>
           );
