@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getData, storeData, containsKey } from '../storage';
-import data from '../data.json';
-import { getWorkouts, initWorkouts } from '../storage/workout';
+import { initWorkouts } from '../storage/workout';
 
 export default function useCachedResources() {
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
@@ -13,8 +11,6 @@ export default function useCachedResources() {
       } catch (e) {
         console.warn(e);
       } finally {
-        const workouts = await getWorkouts();
-        console.log(workouts);
         setIsLoadingComplete(true);
       }
     }
