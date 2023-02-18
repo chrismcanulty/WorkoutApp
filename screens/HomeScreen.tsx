@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList, Text, Pressable } from 'react-native';
 // import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
-import data from '../data.json';
 import { Workout } from '../types/data';
 import WorkoutItem from '../components/WorkoutItem';
+import { getWorkouts } from '../storage/workout';
 
 export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
   // { item }: any -> all props specified as type 'any'; notation below: only {item} has type 'any'
+
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
+
+  useEffect(() => {
+    async function getData() {
+      const _workouts = await getWorkouts();
+      setWorkouts(_workouts);
+    }
+    getData();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -15,7 +25,7 @@ export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
       <Text style={styles.header}>My Workouts</Text>
       {/* <MontserratText style={{ fontSize: 30 }}>New Workouts</MontserratText> */}
       <FlatList
-        data={data as Array<Workout>}
+        data={workouts}
         // Array<Workout> can also be expressed as Workout[]
         renderItem={({ item }) => {
           return (
