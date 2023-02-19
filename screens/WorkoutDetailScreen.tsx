@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Text, Pressable } from 'react-native';
+import { View, StyleSheet, Text, Alert } from 'react-native';
 // import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
+import { PressableText } from '../components/styled/PressableText';
 
 type DetailParams = {
   route: {
@@ -24,9 +25,10 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
       {/* data must be an array for FlatList */}
       <Text style={styles.header}>{workout?.name}</Text>
       {/* <MontserratText style={{ fontSize: 30 }}>New Workouts</MontserratText> */}
-      <Pressable onPress={() => alert('Opening Modal')}>
-        <Text style={{ textDecorationLine: 'underline' }}>Check Sequence</Text>
-      </Pressable>
+      <PressableText
+        onPress={() => alert('Opening Modal')}
+        text="Check Sequence"
+      />
     </View>
   );
 }
