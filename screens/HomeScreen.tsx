@@ -1,23 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, FlatList, Text, Pressable } from 'react-native';
 // import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
-import { Workout } from '../types/data';
 import WorkoutItem from '../components/WorkoutItem';
-import { getWorkouts } from '../storage/workout';
+import { useWorkouts } from '../hooks/useWorkouts';
 
 export default function HomeScreen({ navigation }: NativeStackHeaderProps) {
   // { item }: any -> all props specified as type 'any'; notation below: only {item} has type 'any'
-
-  const [workouts, setWorkouts] = useState<Workout[]>([]);
-
-  useEffect(() => {
-    async function getData() {
-      const _workouts = await getWorkouts();
-      setWorkouts(_workouts);
-    }
-    getData();
-  }, []);
+  const workouts = useWorkouts();
 
   return (
     <View style={styles.container}>
