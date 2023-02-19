@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Pressable } from 'react-native';
 // import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
@@ -22,8 +22,11 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
   return (
     <View style={styles.container}>
       {/* data must be an array for FlatList */}
-      <Text style={styles.header}>Slug - {workout?.name}</Text>
+      <Text style={styles.header}>{workout?.name}</Text>
       {/* <MontserratText style={{ fontSize: 30 }}>New Workouts</MontserratText> */}
+      <Pressable onPress={() => alert('Opening Modal')}>
+        <Text style={{ textDecorationLine: 'underline' }}>Check Sequence</Text>
+      </Pressable>
     </View>
   );
 }
