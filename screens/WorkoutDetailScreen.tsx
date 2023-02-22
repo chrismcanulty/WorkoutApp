@@ -27,13 +27,8 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
       <Text style={styles.header}>{workout?.name}</Text>
       {/* <MontserratText style={{ fontSize: 30 }}>New Workouts</MontserratText> */}
       <Modal
-        activator={() => (
-          <PressableText
-            onPress={() => {
-              alert('Opening');
-            }}
-            text="Check Sequence"
-          />
+        activator={({ handleOpen }) => (
+          <PressableText onPress={handleOpen} text="Check Sequence" />
         )}
       />
     </View>
