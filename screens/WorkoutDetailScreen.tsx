@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Alert } from 'react-native';
+import { View, StyleSheet, Text, Modal } from 'react-native';
 // import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
@@ -29,6 +29,9 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
         onPress={() => alert('Opening Modal')}
         text="Check Sequence"
       />
+      <Modal visible={false} transparent={true} animationType="none">
+        <Text>Hello There!</Text>
+      </Modal>
     </View>
   );
 }
