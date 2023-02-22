@@ -4,6 +4,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
 import { Modal } from '../components/styled/Modal';
+import { PressableText } from '../components/styled/PressableText';
 
 type DetailParams = {
   route: {
@@ -25,7 +26,16 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
       {/* data must be an array for FlatList */}
       <Text style={styles.header}>{workout?.name}</Text>
       {/* <MontserratText style={{ fontSize: 30 }}>New Workouts</MontserratText> */}
-      <Modal />
+      <Modal
+        activator={() => (
+          <PressableText
+            onPress={() => {
+              alert('Opening');
+            }}
+            text="Check Sequence"
+          />
+        )}
+      />
     </View>
   );
 }

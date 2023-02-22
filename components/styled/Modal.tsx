@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, Modal as DefaultModal } from 'react-native';
 import { PressableText } from './PressableText';
 
-export function Modal() {
+// activator: Activator --> refers to an alias since we will pass a component
+export function Modal({ activator: Activator }: any) {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
@@ -16,10 +17,11 @@ export function Modal() {
           <PressableText onPress={() => setModalVisible(false)} text="Close" />
         </View>
       </DefaultModal>
-      <PressableText
-        onPress={() => setModalVisible(true)}
-        text="Check Sequence"
-      />
+      {Activator ? (
+        <Activator />
+      ) : (
+        <PressableText onPress={() => setModalVisible(true)} text="Open" />
+      )}
     </>
   );
 }
