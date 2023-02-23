@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 // import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
 import { Modal } from '../components/styled/Modal';
 import { PressableText } from '../components/styled/PressableText';
+import { formatSec } from '../utils/time';
 
 type DetailParams = {
   route: {
@@ -30,7 +31,13 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
         activator={({ handleOpen }) => (
           <PressableText onPress={handleOpen} text="Check Sequence" />
         )}>
-        <Text>Hello There!</Text>
+        <View>
+          {workout?.sequence.map(si => (
+            <Text key={si.slug}>
+              {si.name} | {si.type} | {formatSec(si.duration)}
+            </Text>
+          ))}
+        </View>
       </Modal>
     </View>
   );
