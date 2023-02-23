@@ -1,15 +1,16 @@
 import React, { FunctionComponent, useState } from 'react';
-import { View, StyleSheet, Text, Modal as DefaultModal } from 'react-native';
+import { View, StyleSheet, Modal as DefaultModal } from 'react-native';
 import { PressableText } from './PressableText';
 
 type ModalProps = {
   activator?: FunctionComponent<{
     handleOpen: () => void;
   }>;
+  children: React.ReactNode;
 };
 
 // activator: Activator --> refers to an alias since we will pass a component
-export function Modal({ activator: Activator }: ModalProps) {
+export function Modal({ activator: Activator, children }: ModalProps) {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
@@ -19,7 +20,7 @@ export function Modal({ activator: Activator }: ModalProps) {
         transparent={false}
         animationType="fade">
         <View style={styles.centerView}>
-          <Text>Hello There!</Text>
+          {children}
           <PressableText onPress={() => setModalVisible(false)} text="Close" />
         </View>
       </DefaultModal>

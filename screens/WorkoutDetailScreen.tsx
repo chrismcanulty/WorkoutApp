@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Button } from 'react-native';
 // import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
@@ -29,8 +29,9 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
       <Modal
         activator={({ handleOpen }) => (
           <PressableText onPress={handleOpen} text="Check Sequence" />
-        )}
-      />
+        )}>
+        <Text>Hello There!</Text>
+      </Modal>
     </View>
   );
 }
