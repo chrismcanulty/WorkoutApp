@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, useWindowDimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
 // import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { useWorkoutBySlug } from '../hooks/useWorkoutBySlug';
@@ -9,6 +9,7 @@ import { formatSec } from '../utils/time';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import WorkoutItem from '../components/WorkoutItem';
 import { SequenceItem } from '../types/data';
+import { useCountDown } from '../hooks/useCountDown';
 
 type DetailParams = {
   route: {
@@ -23,25 +24,14 @@ type Navigation = NativeStackHeaderProps & DetailParams;
 export default function WorkoutDetailScreen({ route }: Navigation) {
   // { item }: any -> all props specified as type 'any'; notation below: only {item} has type 'any'
   const [sequence, setSequence] = useState<SequenceItem[]>([]);
-  const [countDown, setCountDown] = useState(-1);
   const [trackerIdx, setTrackerIdx] = useState(-1);
 
   const workout = useWorkoutBySlug(route.params.slug);
 
-  useEffect(() => {
-    if (trackerIdx == -1) {
-      return;
-    }
-    setCountDown(workout!.sequence[trackerIdx].duration);
-
-    const intervalId = window.setInterval(() => {
-      setCountDown(count => {
-        console.log(count);
-        return count - 1;
-      });
-    }, 1000);
-    return () => window.clearInterval(intervalId);
-  }, [trackerIdx]);
+  const countDown = useCountDown(
+    trackerIdx,
+    trackerIdx >= 0 ? sequence[trackerIdx].duration : -1,
+  );
 
   const addItemToSequence = (idx: number) => {
     setSequence([...sequence, workout!.sequence[idx]]);
