@@ -7,6 +7,7 @@ import { Modal } from '../components/styled/Modal';
 import { PressableText } from '../components/styled/PressableText';
 import { formatSec } from '../utils/time';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import WorkoutItem from '../components/WorkoutItem';
 
 type DetailParams = {
   route: {
@@ -23,28 +24,31 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
 
   const workout = useWorkoutBySlug(route.params.slug);
 
+  if (!workout) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
-      {/* data must be an array for FlatList */}
-      <Text style={styles.header}>{workout?.name}</Text>
-      {/* <MontserratText style={{ fontSize: 30 }}>New Workouts</MontserratText> */}
-      <Modal
-        activator={({ handleOpen }) => (
-          <PressableText onPress={handleOpen} text="Check Sequence" />
-        )}>
-        <View>
-          {workout?.sequence.map((si, idx) => (
-            <View key={si.slug} style={styles.sequenceItem}>
-              <Text>
-                {si.name} | {si.type} | {formatSec(si.duration)}
-              </Text>
-              {idx !== workout.sequence.length - 1 && (
-                <FontAwesome name="arrow-down" />
-              )}
-            </View>
-          ))}
-        </View>
-      </Modal>
+      <WorkoutItem item={workout} childStyles={{ marginTop: 10 }}>
+        <Modal
+          activator={({ handleOpen }) => (
+            <PressableText onPress={handleOpen} text="Check Sequence" />
+          )}>
+          <View>
+            {workout?.sequence.map((si, idx) => (
+              <View key={si.slug} style={styles.sequenceItem}>
+                <Text>
+                  {si.name} | {si.type} | {formatSec(si.duration)}
+                </Text>
+                {idx !== workout.sequence.length - 1 && (
+                  <FontAwesome name="arrow-down" />
+                )}
+              </View>
+            ))}
+          </View>
+        </Modal>
+      </WorkoutItem>
     </View>
   );
 }
