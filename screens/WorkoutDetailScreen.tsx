@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 // import { MontserratText } from '../components/styled/MontserratText';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
@@ -8,6 +8,7 @@ import { PressableText } from '../components/styled/PressableText';
 import { formatSec } from '../utils/time';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import WorkoutItem from '../components/WorkoutItem';
+import { SequenceItem } from '../types/data';
 
 type DetailParams = {
   route: {
@@ -21,8 +22,12 @@ type Navigation = NativeStackHeaderProps & DetailParams;
 
 export default function WorkoutDetailScreen({ route }: Navigation) {
   // { item }: any -> all props specified as type 'any'; notation below: only {item} has type 'any'
-
+  const [sequence, setSequence] = useState<SequenceItem[]>([]);
   const workout = useWorkoutBySlug(route.params.slug);
+
+  const addItemToSequence = (idx: number) => {
+    setSequence([...sequence, workout!.sequence[idx]]);
+  };
 
   if (!workout) {
     return null;
@@ -50,7 +55,13 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
         </Modal>
       </WorkoutItem>
       <View>
-        <FontAwesome name="play-circle-o" size={100} />
+        {sequence.length === 0 && (
+          <FontAwesome
+            name="play-circle-o"
+            size={100}
+            onPress={() => addItemToSequence(0)}
+          />
+        )}
       </View>
     </View>
   );
