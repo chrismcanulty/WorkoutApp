@@ -55,6 +55,9 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
     return null;
   }
 
+  const hasReachedEnd =
+    sequence.length === workout.sequence.length && countDown === 0;
+
   return (
     <View style={styles.container}>
       <WorkoutItem item={workout} childStyles={{ marginTop: 10 }}>
@@ -89,6 +92,15 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
             <Text style={{ fontSize: 55 }}>{countDown}</Text>
           </View>
         )}
+      </View>
+      <View>
+        <Text>
+          {sequence.length === 0
+            ? 'Prepare'
+            : hasReachedEnd
+            ? 'Great Job!'
+            : sequence[trackerIdx].name}
+        </Text>
       </View>
     </View>
   );
