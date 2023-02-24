@@ -28,6 +28,8 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
 
   const workout = useWorkoutBySlug(route.params.slug);
 
+  const startupSeq = ['Go!', '1', '2', '3'];
+
   const { countDown, isRunning, stop, start } = useCountDown(
     trackerIdx,
     // trackerIdx >= 0 ? sequence[trackerIdx].duration : -1,
@@ -58,7 +60,7 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
     // const newSequence = [...sequence, workout!.sequence[idx]];
     setSequence(newSequence);
     setTrackerIdx(idx);
-    start(newSequence[idx].duration);
+    start(newSequence[idx].duration + startupSeq.length);
   };
 
   if (!workout) {
