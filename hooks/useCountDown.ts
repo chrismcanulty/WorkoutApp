@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export function useCountDown(idx: number, initialCount: number) {
+export function useCountDown(idx: number, initialCount: number = -1) {
   const intervalRef = useRef<number>();
   const [countDown, setCountDown] = useState(initialCount);
   const [isRunning, setIsRunning] = useState(false);
