@@ -28,10 +28,12 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
 
   const workout = useWorkoutBySlug(route.params.slug);
 
-  const countDown = useCountDown(
+  const { countDown, isRunning, stop } = useCountDown(
     trackerIdx,
     trackerIdx >= 0 ? sequence[trackerIdx].duration : -1,
   );
+
+  console.log(isRunning);
 
   useEffect(() => {
     console.log(countDown);
@@ -41,6 +43,11 @@ export default function WorkoutDetailScreen({ route }: Navigation) {
     if (trackerIdx === workout.sequence.length - 1) {
       return;
     }
+
+    if (countDown === 10) {
+      stop();
+    }
+
     if (countDown === 0) {
       addItemToSequence(trackerIdx + 1);
     }

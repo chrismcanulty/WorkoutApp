@@ -3,11 +3,14 @@ import { useEffect, useRef, useState } from 'react';
 export function useCountDown(idx: number, initialCount: number) {
   const intervalRef = useRef<number>();
   const [countDown, setCountDown] = useState(initialCount);
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
     if (idx == -1) {
       return;
     }
+
+    setIsRunning(true);
 
     intervalRef.current = window.setInterval(() => {
       setCountDown(count => {
@@ -30,10 +33,15 @@ export function useCountDown(idx: number, initialCount: number) {
 
   const cleanup = () => {
     if (intervalRef.current) {
+      setIsRunning(false);
       window.clearInterval(intervalRef.current);
       intervalRef.current = undefined;
     }
   };
 
-  return countDown;
+  return {
+    countDown,
+    isRunning,
+    stop: cleanup,
+  };
 }
