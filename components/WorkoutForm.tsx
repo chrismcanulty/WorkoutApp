@@ -6,6 +6,8 @@ import { useForm, Controller } from 'react-hook-form';
 export type ExerciseForm = {
   name: string;
   duration: string;
+  type: string;
+  reps?: string;
 };
 
 type WorkoutProps = {
@@ -41,13 +43,39 @@ export default function WorkoutForm({ onSubmit }: WorkoutProps) {
             required: true,
           }}
           name="duration"
-          // defaultValue={}
           render={({ field: { onChange, value } }) => (
             <TextInput
               onChangeText={onChange}
               value={value}
               style={styles.input}
               placeholder="Duration"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="reps"
+          render={({ field: { onChange, value } }) => (
+            <TextInput
+              onChangeText={onChange}
+              value={value}
+              style={styles.input}
+              placeholder="Repetitions"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          name="type"
+          render={({ field: { onChange, value } }) => (
+            <TextInput
+              onChangeText={onChange}
+              value={value}
+              style={styles.input}
+              placeholder="Type"
             />
           )}
         />
