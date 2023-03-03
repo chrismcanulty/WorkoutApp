@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { PressableText } from './styled/PressableText';
 import { useForm, Controller } from 'react-hook-form';
@@ -16,6 +16,7 @@ type WorkoutProps = {
 
 export default function WorkoutForm({ onSubmit }: WorkoutProps) {
   const { control, handleSubmit } = useForm();
+  const [isSelectionOn, setSelectionOn] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -74,12 +75,30 @@ export default function WorkoutForm({ onSubmit }: WorkoutProps) {
             }}
             name="type"
             render={({ field: { onChange, value } }) => (
-              <TextInput
-                onChangeText={onChange}
-                value={value}
-                style={styles.input}
-                placeholder="Type"
-              />
+              <View style={{ flex: 1 }}>
+                {isSelectionOn ? (
+                  <View>
+                    <PressableText
+                      text="exercise"
+                      onPressIn={() => setSelectionOn(false)}
+                    />
+                    <PressableText
+                      text="break"
+                      onPressIn={() => setSelectionOn(false)}
+                    />
+                    <PressableText
+                      text="stretch"
+                      onPressIn={() => setSelectionOn(false)}
+                    />
+                  </View>
+                ) : (
+                  <TextInput
+                    onPressIn={() => setSelectionOn(true)}
+                    style={styles.input}
+                    placeholder="Type"
+                  />
+                )}
+              </View>
             )}
           />
         </View>
