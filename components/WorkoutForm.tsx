@@ -14,6 +14,8 @@ type WorkoutProps = {
   onSubmit: (form: ExerciseForm) => void;
 };
 
+const selectionItems = ['exercise', 'break', 'stretch'];
+
 export default function WorkoutForm({ onSubmit }: WorkoutProps) {
   const { control, handleSubmit } = useForm();
   const [isSelectionOn, setSelectionOn] = useState(false);
@@ -78,18 +80,14 @@ export default function WorkoutForm({ onSubmit }: WorkoutProps) {
               <View style={{ flex: 1 }}>
                 {isSelectionOn ? (
                   <View>
-                    <PressableText
-                      text="exercise"
-                      onPressIn={() => setSelectionOn(false)}
-                    />
-                    <PressableText
-                      text="break"
-                      onPressIn={() => setSelectionOn(false)}
-                    />
-                    <PressableText
-                      text="stretch"
-                      onPressIn={() => setSelectionOn(false)}
-                    />
+                    {selectionItems.map(selection => (
+                      <PressableText
+                        key={selection}
+                        text={selection}
+                        style={styles.selection}
+                        onPressIn={() => setSelectionOn(false)}
+                      />
+                    ))}
                   </View>
                 ) : (
                   <TextInput
@@ -130,5 +128,10 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
+  },
+  selection: {
+    margin: 2,
+    padding: 3,
+    alignSelf: 'center',
   },
 });
