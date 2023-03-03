@@ -85,7 +85,10 @@ export default function WorkoutForm({ onSubmit }: WorkoutProps) {
                         key={selection}
                         text={selection}
                         style={styles.selection}
-                        onPressIn={() => setSelectionOn(false)}
+                        onPressIn={() => {
+                          onChange(selection);
+                          setSelectionOn(false);
+                        }}
                       />
                     ))}
                   </View>
@@ -93,6 +96,7 @@ export default function WorkoutForm({ onSubmit }: WorkoutProps) {
                   <TextInput
                     onPressIn={() => setSelectionOn(true)}
                     style={styles.input}
+                    value={value}
                     placeholder="Type"
                   />
                 )}
