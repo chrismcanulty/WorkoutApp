@@ -88,6 +88,7 @@ export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
                 onSubmit={data => {
                   handleWorkoutSubmit(data);
                   handleClose();
+                  navigation.navigate('Home');
                 }}
               />
             </View>
