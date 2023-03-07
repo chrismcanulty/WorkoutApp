@@ -1,10 +1,11 @@
 import slugify from 'slugify';
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, Alert } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import ExerciseForm, { ExerciseFormData } from '../components/ExerciseForm';
 import { SequenceItem, SequenceType } from '../types/data';
 import ExerciseItem from '../components/ExerciseItem';
+import { PressableText } from '../components/styled/PressableText';
 
 export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
   const [seqItems, setSeqItems] = useState<SequenceItem[]>([]);
@@ -28,7 +29,18 @@ export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
     <View style={styles.container}>
       <FlatList
         data={seqItems}
-        renderItem={ExerciseItem}
+        renderItem={({ item, index }) => (
+          <ExerciseItem item={item}>
+            <PressableText
+              text={'Remove'}
+              onPressIn={() => {
+                const items = [...seqItems];
+                items.splice(index, 1);
+                setSeqItems(items);
+              }}
+            />
+          </ExerciseItem>
+        )}
         keyExtractor={item => item.slug}
       />
       <ExerciseForm onSubmit={handleFormSubmit} />
