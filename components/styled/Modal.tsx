@@ -6,12 +6,22 @@ type ModalProps = {
   activator?: FunctionComponent<{
     handleOpen: () => void;
   }>;
-  children: React.ReactNode;
+  children: FunctionComponent<{
+    handleOpen: () => void;
+    handleClose: () => void;
+  }>;
 };
 
 // activator: Activator --> refers to an alias since we will pass a component
 export function Modal({ activator: Activator, children }: ModalProps) {
   const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleOpen = () => {
+    setModalVisible(true);
+  };
+  const handleClose = () => {
+    setModalVisible(false);
+  };
 
   return (
     <>
@@ -20,14 +30,16 @@ export function Modal({ activator: Activator, children }: ModalProps) {
         transparent={false}
         animationType="fade">
         <View style={styles.centerView}>
-          <View style={styles.contentView}>{children}</View>
-          <PressableText onPress={() => setModalVisible(false)} text="Close" />
+          <View style={styles.contentView}>
+            {children({ handleOpen, handleClose })}
+          </View>
+          <PressableText onPress={handleClose} text="Close" />
         </View>
       </DefaultModal>
       {Activator ? (
-        <Activator handleOpen={() => setModalVisible(true)} />
+        <Activator handleOpen={handleOpen} />
       ) : (
-        <PressableText onPress={() => setModalVisible(true)} text="Open" />
+        <PressableText onPress={handleOpen} text="Open" />
       )}
     </>
   );
