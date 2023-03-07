@@ -1,18 +1,18 @@
 import slugify from 'slugify';
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, Text } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import ExerciseForm, { ExerciseFormData } from '../components/ExerciseForm';
 import { SequenceItem, SequenceType } from '../types/data';
 import ExerciseItem from '../components/ExerciseItem';
 import { PressableText } from '../components/styled/PressableText';
 import { Modal } from '../components/styled/Modal';
-import WorkoutForm from '../components/WorkoutForm';
+import WorkoutForm, { WorkoutFormData } from '../components/WorkoutForm';
 
 export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
   const [seqItems, setSeqItems] = useState<SequenceItem[]>([]);
 
-  const handleFormSubmit = (form: ExerciseFormData) => {
+  const handleExerciseSubmit = (form: ExerciseFormData) => {
     const sequenceItem: SequenceItem = {
       slug: slugify(form.name + ' ' + Date.now(), { lower: true }),
       name: form.name,
@@ -25,6 +25,14 @@ export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
     }
 
     setSeqItems([...seqItems, sequenceItem]);
+  };
+
+  const handleWorkoutSubmit = (form: WorkoutFormData) => {
+    const workout = {
+      name: form.name,
+      slug: slugify(form.name + ' ' + Date.now(), { lower: true }),
+    };
+    console.log(workout);
   };
 
   return (
@@ -45,7 +53,7 @@ export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
         )}
         keyExtractor={item => item.slug}
       />
-      <ExerciseForm onSubmit={handleFormSubmit} />
+      <ExerciseForm onSubmit={handleExerciseSubmit} />
       <View>
         <Modal
           activator={({ handleOpen }) => (
@@ -56,11 +64,7 @@ export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
             />
           )}>
           <View>
-            <WorkoutForm
-              onSubmit={data => {
-                console.log(data);
-              }}
-            />
+            <WorkoutForm onSubmit={handleWorkoutSubmit} />
           </View>
         </Modal>
       </View>
