@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 import { PressableText } from './styled/PressableText';
 import { useForm, Controller } from 'react-hook-form';
 

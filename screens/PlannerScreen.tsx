@@ -7,6 +7,7 @@ import { SequenceItem, SequenceType } from '../types/data';
 import ExerciseItem from '../components/ExerciseItem';
 import { PressableText } from '../components/styled/PressableText';
 import { Modal } from '../components/styled/Modal';
+import WorkoutForm from '../components/WorkoutForm';
 
 export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
   const [seqItems, setSeqItems] = useState<SequenceItem[]>([]);
@@ -55,7 +56,11 @@ export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
             />
           )}>
           <View>
-            <Text>Here will be my simple form</Text>
+            <WorkoutForm
+              onSubmit={data => {
+                console.log(data);
+              }}
+            />
           </View>
         </Modal>
       </View>
