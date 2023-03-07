@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import ExerciseForm, { ExerciseFormData } from '../components/ExerciseForm';
-import { SequenceItem, SequenceType } from '../types/data';
+import { SequenceItem, SequenceType, Workout } from '../types/data';
 import ExerciseItem from '../components/ExerciseItem';
 import { PressableText } from '../components/styled/PressableText';
 import { Modal } from '../components/styled/Modal';
@@ -28,11 +28,19 @@ export default function PlannerScreen({ navigation }: NativeStackHeaderProps) {
   };
 
   const handleWorkoutSubmit = (form: WorkoutFormData) => {
-    const workout = {
-      name: form.name,
-      slug: slugify(form.name + ' ' + Date.now(), { lower: true }),
-    };
-    console.log(workout);
+    if (seqItems.length > 0) {
+      const duration = seqItems.reduce((acc, item) => {
+        return acc + item.duration;
+      }, 0);
+      const workout: Workout = {
+        name: form.name,
+        slug: slugify(form.name + ' ' + Date.now(), { lower: true }),
+        difficulty: 'easy',
+        sequence: [...seqItems],
+        duration,
+      };
+      console.log(workout);
+    }
   };
 
   return (
