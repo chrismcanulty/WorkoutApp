@@ -1,4 +1,5 @@
 {
   "name": "WorkoutApp",
-  "displayName": "WorkoutApp"
+  "displayName": "WorkoutApp",
+  "userInterfaceStyle": "automatic"
 }
